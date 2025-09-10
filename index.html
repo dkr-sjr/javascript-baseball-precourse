@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko"> 
 
 <head>
   <meta charset="UTF-8" />
-  <title>숫자 야구 게임</title>
+  <title>숫자 야구 게임</title> 
 </head>
 
 <body>
@@ -25,6 +25,17 @@
   </div>
   <script src="https://cdn.jsdelivr.net/npm/@woowacourse/mission-utils@1.0.1/dist/mission-utils.min.js"></script>
   <script type="module" src="src/index.js"></script>
+
+  
+  <script>
+    let answerNumbers = [0,0,0];
+    answerNumbers.forEach((element,index,array) =>{
+      array[index] = MissionUtils.Random.pickNumberInRange(1,9);
+
+    });
+    console.log(answerNumbers);
+
+  </script>
 </body>
 
 </html>
