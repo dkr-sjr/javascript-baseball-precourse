@@ -48,8 +48,8 @@ while(answerNumbers.length < 3){
 console.log(answerNumbers);
 const GameHandle = new BaseballGame();
 
-document.getElementById('submit').addEventListener('click', () => {
-  const userInputString = document.getElementById('user-input').value;
+document.querySelector('#submit').addEventListener('click', () => {
+  const userInputString = document.querySelector('#user-input').value;
   const digitNumber = Number(userInputString);
   let stringToPrint = '';
   if(Number.isInteger(digitNumber) && 111 <= digitNumber && digitNumber <= 999){
@@ -60,6 +60,6 @@ document.getElementById('submit').addEventListener('click', () => {
   {
 
   }
-  console.log(stringToPrint);
+
 
 });
