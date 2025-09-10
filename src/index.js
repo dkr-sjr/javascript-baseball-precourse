@@ -26,13 +26,40 @@ export default class BaseballGame {
 
   compare(computerNumbers, userNumber, idx){
     for(let i =0; i < computerNumbers.length ; i+=1){
-      if(computerNumbers[i] === userNumber && i === idx){
+      if(computerNumbers[i] == userNumber && i === idx){
         return 'strike';
       }
-      if(computerNumbers[i] === userNumber && i !== idx){
+      if(computerNumbers[i] == userNumber && i !== idx){
         return 'ball';
       }
     }
     return 'Nothing';
   }
 }
+
+
+let answerNumbers = [];
+while(answerNumbers.length < 3){
+  const randomNum = MissionUtils.Random.pickNumberInRange(1,9);
+  if(answerNumbers.includes(randomNum))
+    continue;
+  answerNumbers.push(randomNum);
+}
+console.log(answerNumbers);
+const GameHandle = new BaseballGame();
+
+document.getElementById('submit').addEventListener('click', () => {
+  const userInputString = document.getElementById('user-input').value;
+  const digitNumber = Number(userInputString);
+  let stringToPrint = '';
+  if(Number.isInteger(digitNumber) && 111 <= digitNumber && digitNumber <= 999){
+    const userInputNumbers = [Number(userInputString[0]),Number(userInputString[1]),Number(userInputString[2])];
+    stringToPrint = GameHandle.play(answerNumbers,userInputNumbers);
+  }
+  else
+  {
+
+  }
+  console.log(stringToPrint);
+
+});
