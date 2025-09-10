@@ -38,7 +38,7 @@ export default class BaseballGame {
 }
 
 const checkInput = (inInput) =>{
-  const digitNumber = Number(inInput);
+  let digitNumber = Number(inInput);
   if(!Number.isInteger(digitNumber) || 111 > digitNumber || digitNumber > 999)
     return false;
   
@@ -46,6 +46,7 @@ const checkInput = (inInput) =>{
   while(digitNumber !== 0)
   {
     const tmp = digitNumber%10;
+    digitNumber = Math.floor(digitNumber/ 10);
     if(set.includes(tmp)){
       return false;
     }
@@ -68,7 +69,7 @@ const GameHandle = new BaseballGame();
 
 document.querySelector('#submit').addEventListener('click', () => {
   const userInputString = document.querySelector('#user-input').value;
-  
+
   let stringToPrint = '';
   if(checkInput(userInputString)){
     const userInputNumbers = [Number(userInputString[0]),Number(userInputString[1]),Number(userInputString[2])];
@@ -76,7 +77,8 @@ document.querySelector('#submit').addEventListener('click', () => {
   }
   else
   {
-
+    alert('입력값이 형식에 맞지 않습니다!');
+    document.querySelector('#user-input').value = '';
   }
 
 
