@@ -5,23 +5,14 @@ export default class BaseballGame {
 
     for(let i = 0 ; i < 3; i+=1){
       let result = this.compare(computerInputNumbers,userInputNumbers[i], i);
-      if(result === 'strike')
+      if(result === 'strike'){
         strikeCount+=1;
-      else if(result === 'ball')
+      }
+      else if(result === 'ball'){
         ballCount+=1;
+      }
     }
-    
-    let output = '';
-    if(ballCount !== 0)
-      output += (ballCount.toString() + '볼'); 
-    if(output !== '')
-      output += ' ';
-    if(strikeCount !==0)
-      output += (strikeCount.toString() +'스트라이크')
-    if(output ==='')
-      output = '낫싱'
-
-    return output;
+    return this.makeResult(strikeCount,ballCount);
   }
 
   compare(computerNumbers, userNumber, idx){
@@ -35,22 +26,37 @@ export default class BaseballGame {
     }
     return 'Nothing';
   }
+
+  makeResult(strikeCount, ballCount){
+    let output = '';
+    if(ballCount !== 0){
+      output += (ballCount.toString() + '볼 '); 
+    }
+    if(strikeCount !==0){
+      output += (strikeCount.toString() +'스트라이크')
+    }
+    if(output ==='')
+    {
+      output = '낫싱'
+    }
+    return output;
+  }
 }
 
 const checkInput = (inInput) =>{
   let digitNumber = Number(inInput);
-  if(!Number.isInteger(digitNumber) || 111 > digitNumber || digitNumber > 999)
+  if(!Number.isInteger(digitNumber) || 111 > digitNumber || digitNumber > 999){
     return false;
-  
+  }
   let set = [];
   while(digitNumber !== 0)
   {
-    const tmp = digitNumber%10;
+    const onePlace = digitNumber%10;
     digitNumber = Math.floor(digitNumber/ 10);
-    if(set.includes(tmp)){
+    if(set.includes(onePlace)){
       return false;
     }
-    set.push(tmp);
+    set.push(onePlace);
   }
   return true;
 };
