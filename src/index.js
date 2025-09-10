@@ -37,22 +37,40 @@ export default class BaseballGame {
   }
 }
 
+const checkInput = (inInput) =>{
+  const digitNumber = Number(inInput);
+  if(!Number.isInteger(digitNumber) || 111 > digitNumber || digitNumber > 999)
+    return false;
+  
+  let set = [];
+  while(digitNumber !== 0)
+  {
+    const tmp = digitNumber%10;
+    if(set.includes(tmp)){
+      return false;
+    }
+    set.push(tmp);
+  }
+  return true;
+};
 
 let answerNumbers = [];
+
 while(answerNumbers.length < 3){
   const randomNum = MissionUtils.Random.pickNumberInRange(1,9);
   if(answerNumbers.includes(randomNum))
     continue;
   answerNumbers.push(randomNum);
 }
+
 console.log(answerNumbers);
 const GameHandle = new BaseballGame();
 
 document.querySelector('#submit').addEventListener('click', () => {
   const userInputString = document.querySelector('#user-input').value;
-  const digitNumber = Number(userInputString);
+  
   let stringToPrint = '';
-  if(Number.isInteger(digitNumber) && 111 <= digitNumber && digitNumber <= 999){
+  if(checkInput(userInputString)){
     const userInputNumbers = [Number(userInputString[0]),Number(userInputString[1]),Number(userInputString[2])];
     stringToPrint = GameHandle.play(answerNumbers,userInputNumbers);
   }
