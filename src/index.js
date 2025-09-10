@@ -26,10 +26,10 @@ export default class BaseballGame {
 
   compare(computerNumbers, userNumber, idx){
     for(let i =0; i < computerNumbers.length ; i+=1){
-      if(computerNumbers[i] == userNumber && i === idx){
+      if(computerNumbers[i] === userNumber && i === idx){
         return 'strike';
       }
-      if(computerNumbers[i] == userNumber && i !== idx){
+      if(computerNumbers[i] === userNumber && i !== idx){
         return 'ball';
       }
     }
@@ -55,6 +55,14 @@ const checkInput = (inInput) =>{
   return true;
 };
 
+const printResult = (stringToPrint) =>{
+  if(stringToPrint === '3스트라이크'){
+    stringToPrint = '축하합니다!\n정답을 맞추셨습니다!'
+    document.querySelector('#game-restart-button').style.display = 'block';
+  }
+  document.querySelector('#result').textContent = stringToPrint;
+};
+
 let answerNumbers = [];
 
 while(answerNumbers.length < 3){
@@ -63,13 +71,13 @@ while(answerNumbers.length < 3){
     continue;
   answerNumbers.push(randomNum);
 }
+document.querySelector('#game-restart-button').style.display = 'none';
 
 console.log(answerNumbers);
 const GameHandle = new BaseballGame();
 
 document.querySelector('#submit').addEventListener('click', () => {
   const userInputString = document.querySelector('#user-input').value;
-
   let stringToPrint = '';
   if(checkInput(userInputString)){
     const userInputNumbers = [Number(userInputString[0]),Number(userInputString[1]),Number(userInputString[2])];
@@ -80,6 +88,6 @@ document.querySelector('#submit').addEventListener('click', () => {
     alert('입력값이 형식에 맞지 않습니다!');
     document.querySelector('#user-input').value = '';
   }
-
+  printResult(stringToPrint);
 
 });

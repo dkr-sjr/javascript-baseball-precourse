@@ -18,6 +18,7 @@ BaseBallGame 메서드
 
 필요 메서드
 1. checkInput - 값이 규칙에 맞는지 검사할 함수
+2. printResult - html에 결과 값을 출력할 함수
 
 필요 기능
 1. 첫 초기화 - 페이지 접속시 정답을 MissionUtils 라이브러리를 사용하여 랜덤 설정
