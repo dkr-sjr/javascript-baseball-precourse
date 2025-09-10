@@ -63,14 +63,19 @@ const printResult = (stringToPrint) =>{
   document.querySelector('#result').textContent = stringToPrint;
 };
 
-let answerNumbers = [];
+const getRandomNumbers = ()=>{
+  let output = [];
+  
+  while(output.length < 3){
+    const randomNum = MissionUtils.Random.pickNumberInRange(1,9);
+    if(output.includes(randomNum))
+      continue;
+    output.push(randomNum);
+  }
+  return output;
+};
 
-while(answerNumbers.length < 3){
-  const randomNum = MissionUtils.Random.pickNumberInRange(1,9);
-  if(answerNumbers.includes(randomNum))
-    continue;
-  answerNumbers.push(randomNum);
-}
+let answerNumbers = getRandomNumbers();
 document.querySelector('#game-restart-button').style.display = 'none';
 
 console.log(answerNumbers);
@@ -90,4 +95,11 @@ document.querySelector('#submit').addEventListener('click', () => {
   }
   printResult(stringToPrint);
 
+});
+
+document.querySelector('#game-restart-button').addEventListener('click', ()=>{
+  answerNumbers = getRandomNumbers();
+  document.querySelector('#game-restart-button').style.display = 'none';
+  document.querySelector('#user-input').value = '';
+  console.log(answerNumbers);
 });
