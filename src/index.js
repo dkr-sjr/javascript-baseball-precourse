@@ -1,31 +1,44 @@
-import BaseballGame from "./BaseBallGame.js";
-import {checkInput,printResult,getRandomNumbers} from "./additionalFuctions.js";
+// @ts-check
+// eslint-disable-next-line import/extensions
+import BaseballGame from './BaseballGame.js';
+// eslint-disable-next-line import/extensions
+import { checkInput, printResult, getRandomNumbers } from './additionalFunctions.js';
 
+/** @type {number[]} */
 let answerNumbers = getRandomNumbers();
-document.querySelector('#game-restart-button').style.display = 'none';
 
-console.log(answerNumbers);
-const GameHandle = new BaseballGame();
+/** @type {HTMLElement | null} */
+const gameRestartButton = document.querySelector('#game-restart-button');
+if (gameRestartButton) {
+  gameRestartButton.style.display = 'none';
+}
 
-document.querySelector('#submit').addEventListener('click', () => {
-  const userInputString = document.querySelector('#user-input').value;
-  let stringToPrint = '';
-  if(checkInput(userInputString)){
-    const userInputNumbers = [Number(userInputString[0]),Number(userInputString[1]),Number(userInputString[2])];
-    stringToPrint = GameHandle.play(answerNumbers,userInputNumbers);
-  }
-  else
-  {
+/** @type {HTMLElement} */
+(document.querySelector('#submit')).addEventListener('click', () => {
+  /** @type {string} */
+  const userInputString = /** @type {HTMLInputElement} */ (document.querySelector('#user-input')).value;
+
+  /** @type {string} */
+  let playResult = '';
+  if (checkInput(userInputString)) {
+    /** @type {number[]} */
+    const userInputNumbers = [...userInputString].map(Number);
+    playResult = BaseballGame.play(answerNumbers, userInputNumbers);
+  } else {
+    /* eslint-disable no-alert */
     alert('입력값이 형식에 맞지 않습니다!');
-    document.querySelector('#user-input').value = '';
+    /* eslint-enable no-alert */
+    /** @type {HTMLInputElement} */(document.querySelector('#user-input')).value = '';
   }
-  printResult(stringToPrint);
-
+  printResult(playResult);
 });
 
-document.querySelector('#game-restart-button').addEventListener('click', ()=>{
+/** @type {HTMLElement} */
+(document.querySelector('#game-restart-button')).addEventListener('click', () => {
   answerNumbers = getRandomNumbers();
-  document.querySelector('#game-restart-button').style.display = 'none';
-  document.querySelector('#user-input').value = '';
-  console.log(answerNumbers);
+  /** @type {HTMLElement} */
+  (document.querySelector('#game-restart-button')).style.display = 'none';
+  /** @type {HTMLInputElement} */
+  (document.querySelector('#user-input')).value = '';
+  printResult('');
 });

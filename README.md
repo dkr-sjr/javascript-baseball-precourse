@@ -14,7 +14,7 @@
 
 BaseBallGame 메서드
 1. play - 확인 버튼을 클릭시 실행할 함수로 들어온 값을 비교 해 결과를 반환
-2. compare - 값들의 입력을 직접 비교할 함수
+2. compareNumberWithAnswers - 값들의 입력을 직접 비교할 함수
 3. makeResult - 비교한 값을 이용하여 출력용 문자열을 반환하는 함수
 
 필요 메서드
