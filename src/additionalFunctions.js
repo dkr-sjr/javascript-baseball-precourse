@@ -2,15 +2,12 @@
 
 /** @type {(string) => bool} */
 export const checkInput = (inInput) => {
-  /** @type {number} */
   let digitNumber = Number(inInput);
   if (!Number.isInteger(digitNumber) || digitNumber < 111 || digitNumber > 999) {
     return false;
   }
-  /** @type {number[]} */
   const usedDigits = [];
   while (digitNumber !== 0) {
-    /** @type {number} */
     const onePlace = digitNumber % 10;
     digitNumber = Math.floor(digitNumber / 10);
     if (usedDigits.includes(onePlace)) {
@@ -20,9 +17,9 @@ export const checkInput = (inInput) => {
   }
   return true;
 };
+
 /** @type {(string) => } */
 export const printResult = (playResult) => {
-  /** @type {string} */
   let stringToPrint = playResult;
   if (playResult === '3스트라이크') {
     stringToPrint = '축하합니다!\n정답을 맞추셨습니다!';
@@ -33,11 +30,9 @@ export const printResult = (playResult) => {
 
 /** @type {{() => number[]}} */
 export const getRandomNumbers = () => {
-  /** @type {number[]} */
   const output = [];
 
   while (output.length < 3) {
-    /** @type {number} */
     const randomNum = MissionUtils.Random.pickNumberInRange(1, 9);
     if (!output.includes(randomNum)) {
       output.push(randomNum);
