@@ -10,18 +10,20 @@ GameView.ToggleGameRestartButton(false);
 document.querySelector('#submit').addEventListener('click', () => {
   const userInput = document.querySelector('#user-input').value;
   let gameResult = '';
+
   if (baseballGame.play(userInput) === true) {
     gameResult = baseballGame.getResult();
   } else {
     GameView.alertMessage('입력값이 형식에 맞지 않습니다!');
+    gameResult = '';
     GameView.ClearUserInputText();
   }
 
   if (gameResult === '3스트라이크') {
     gameResult = '축하합니다!\n정답을 맞추셨습니다!';
+    GameView.ToggleGameRestartButton(true);
   }
   GameView.showResult(gameResult);
-  GameView.ToggleGameRestartButton(true);
 });
 
 document.querySelector('#game-restart-button').addEventListener('click', () => {

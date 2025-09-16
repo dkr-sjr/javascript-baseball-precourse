@@ -38,6 +38,9 @@ export default class BaseballGame {
 
   /** @type {() => void} */
   #compareUserNumberWithAnswerNumbers() {
+    this.#ballCount = 0;
+    this.#strikeCount = 0;
+
     this.#userNumbers.forEach((number, position) => {
       if (number === this.#answerNumbers[position]) {
         this.#strikeCount += 1;
@@ -47,9 +50,10 @@ export default class BaseballGame {
     });
   }
 
-  /** @type {(number,number) => void} */
+  /** @type {() => void} */
   #makeResult() {
     this.#result = '';
+
     if (this.#ballCount !== 0) {
       this.#result += `${this.#ballCount}볼 `;
     }
@@ -64,6 +68,7 @@ export default class BaseballGame {
   /** @type {(string) => bool} */
   #convertInput(userInput) {
     let digitNumber = Number(userInput);
+
     if (!Number.isInteger(digitNumber) || digitNumber < 111 || digitNumber > 999) {
       return false;
     }
@@ -75,7 +80,7 @@ export default class BaseballGame {
       if (this.#userNumbers.includes(onePlace)) {
         return false;
       }
-      this.#userNumbers.push(onePlace);
+      this.#userNumbers.unshift(onePlace);
     }
 
     return true;

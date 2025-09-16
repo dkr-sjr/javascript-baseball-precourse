@@ -4,9 +4,9 @@ export default class GameView {
     const gameRestartButton = document.querySelector('#game-restart-button');
 
     if (shouldShow === true) {
-      gameRestartButton.style.display = 'none';
-    } else if (shouldShow === false) {
       gameRestartButton.style.display = 'block';
+    } else if (shouldShow === false) {
+      gameRestartButton.style.display = 'none';
     }
   }
 
@@ -24,6 +24,6 @@ export default class GameView {
 
   /** @type {(string) => void} */
   static showResult(result) {
-    document.querySelector('#result').value = result;
+    document.querySelector('#result').textContent = result;
   }
 }
